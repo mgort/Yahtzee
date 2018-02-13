@@ -3,6 +3,9 @@ package com.example.yahtzee;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** This is Yahtzee
+ *
+ */
 public class Yahtzee {
 
     private static ArrayList<Dice> allDice;
