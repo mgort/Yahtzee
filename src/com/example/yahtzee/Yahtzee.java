@@ -30,22 +30,17 @@ public class Yahtzee {
 
             int numberOfRolls = 1;
 
-            System.out.println("Would you like to roll again? (y/n): ");
-            String continueResponse = scanner.nextLine();
-
-            while (numberOfRolls < 3 && !continueResponse.contains("n")){
+            while (numberOfRolls < 3){
                 // Roll again
                 System.out.println("Enter the ids of the dice you want to roll: ");
                 String diceIds = scanner.nextLine();
+                if(diceIds.equals("")) {
+                    break;
+                }
                 updateHand(diceIds);
                 rollHand();
                 numberOfRolls++;
                 displayDice();
-
-                if(numberOfRolls < 3) {
-                    System.out.println("Would you like to roll again? (y/n): ");
-                    continueResponse = scanner.nextLine();
-                }
             }
 
             // The player is finished rolling, they need to score their dice
