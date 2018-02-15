@@ -81,15 +81,16 @@ public class Yahtzee {
 
         // Create the score conditions. For now, we only support summing dice of a certain value
         scoreConditions = new ArrayList<ScoreCondition>();
-        scoreConditions.add(new SimpleScoreCondition(1, "Sum of all dice with a value of 1", 1));
-        scoreConditions.add(new SimpleScoreCondition(2, "Sum of all dice with a value of 2", 2));
-        scoreConditions.add(new SimpleScoreCondition(3, "Sum of all dice with a value of 3", 3));
-        scoreConditions.add(new SimpleScoreCondition(4, "Sum of all dice with a value of 4", 4));
-        scoreConditions.add(new SimpleScoreCondition(5, "Sum of all dice with a value of 5", 5));
-        scoreConditions.add(new SimpleScoreCondition(6, "Sum of all dice with a value of 6", 6));
+        scoreConditions.add(new SimpleScoreCondition(1, "Aces", 1));
+        scoreConditions.add(new SimpleScoreCondition(2, "Twos", 2));
+        scoreConditions.add(new SimpleScoreCondition(3, "Threes", 3));
+        scoreConditions.add(new SimpleScoreCondition(4, "Fours", 4));
+        scoreConditions.add(new SimpleScoreCondition(5, "Fives", 5));
+        scoreConditions.add(new SimpleScoreCondition(6, "Sixes", 6));
         scoreConditions.add(new OfAKindScoreCondition(7, "3 of a Kind", 3));
         scoreConditions.add(new OfAKindScoreCondition(8, "4 of a Kind", 4));
-        scoreConditions.add(new OfAKindScoreCondition(9, "Chance", 0));
+        scoreConditions.add(new FullHouseScoreCondition(9, "Full House"));
+        scoreConditions.add(new OfAKindScoreCondition(10, "Chance", 0));
     }
 
     private static boolean allScoreConditionsCompleted() {

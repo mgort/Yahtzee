@@ -31,6 +31,4 @@ public class SimpleScoreCondition extends ScoreCondition {
         // All dice combinations can be scored
         return true;
     }
-
-
 }
