@@ -25,4 +25,12 @@ public class SimpleScoreCondition extends ScoreCondition {
         this.points = total;
         this.completed = true;
     }
+
+    @Override
+    public boolean isValid(ArrayList<Dice> allDice) {
+        // All dice combinations can be scored
+        return true;
+    }
+
+
 }

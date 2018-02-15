@@ -32,4 +32,6 @@ public abstract class ScoreCondition {
     }
 
     public abstract void score(ArrayList<Dice> allDice);
+
+    public abstract boolean isValid(ArrayList<Dice> allDice);
 }

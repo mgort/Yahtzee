@@ -66,7 +66,7 @@ public class Yahtzee {
         displayFinalScore();
     }
 
-    public static void initialize() {
+    private static void initialize() {
         // Create 5 dice
         allDice = new ArrayList<Dice>();
         allDice.add(new Dice('a'));
@@ -87,10 +87,12 @@ public class Yahtzee {
         scoreConditions.add(new SimpleScoreCondition(4, "Sum of all dice with a value of 4", 4));
         scoreConditions.add(new SimpleScoreCondition(5, "Sum of all dice with a value of 5", 5));
         scoreConditions.add(new SimpleScoreCondition(6, "Sum of all dice with a value of 6", 6));
-
+        scoreConditions.add(new OfAKindScoreCondition(7, "3 of a Kind", 3));
+        scoreConditions.add(new OfAKindScoreCondition(8, "4 of a Kind", 4));
+        scoreConditions.add(new OfAKindScoreCondition(9, "Chance", 0));
     }
 
-    public static boolean allScoreConditionsCompleted() {
+    private static boolean allScoreConditionsCompleted() {
         for (ScoreCondition condition : scoreConditions) {
             if(!condition.completed) return false;
         }
@@ -98,7 +100,7 @@ public class Yahtzee {
         return true;
     }
 
-    public static void displayScoreConditions() {
+    private static void displayScoreConditions() {
         System.out.println("Score Conditions:");
 
         for (ScoreCondition condition : scoreConditions) {
@@ -108,7 +110,7 @@ public class Yahtzee {
         System.out.println();
     }
 
-    public static void displayDice() {
+    private static void displayDice() {
         System.out.println("Dice:");
 
         for (Dice dice : allDice) {
@@ -118,13 +120,13 @@ public class Yahtzee {
         System.out.println();
     }
 
-    public static void displayTurnNumber(int turnNum) {
+    private static void displayTurnNumber(int turnNum) {
         System.out.println(line);
         System.out.println("Turn #" + turnNum);
         System.out.println(line);
     }
 
-    public static void rollHand() {
+    private static void rollHand() {
         for (Dice dice : hand) {
             dice.roll();
         }
@@ -132,7 +134,7 @@ public class Yahtzee {
         System.out.println();
     }
 
-    public static void updateHand(String diceIds) {
+    private static void updateHand(String diceIds) {
         hand = new ArrayList<Dice>();
 
         for (Dice dice : allDice) {
@@ -141,16 +143,17 @@ public class Yahtzee {
         }
     }
 
-    public static boolean isValidId(String value) {
+    private static boolean isValidId(String value) {
         // Checks if the given string value is a valid int and a score condition exists with that id
         try {
             int id = Integer.parseInt(value);
 
             for(ScoreCondition condition : scoreConditions){
                 if(condition.getId() == id){
-                    if(condition.isCompeted())
-                        return false;
-                    return true;
+                    if(!condition.isCompeted()){
+                        return condition.isValid(allDice);
+                    }
+                    return false;
                 }
             }
 
@@ -161,15 +164,15 @@ public class Yahtzee {
         return false;
     }
 
-    public static void scoreTurn(int scoreConditionId){
+    private static void scoreTurn(int scoreConditionId){
         scoreConditions.get(scoreConditionId - 1).score(allDice);
     }
 
-    public static void displayFinalScore() {
+    private static void displayFinalScore() {
         int finalScore = 0;
 
         for(ScoreCondition condition : scoreConditions){
-            finalScore += condition.points;
+            finalScore += condition.getPoints();
         }
 
         System.out.println("Your final score is: " + finalScore);
