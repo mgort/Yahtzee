@@ -2,12 +2,12 @@ package com.example.yahtzee;
 
 import java.util.ArrayList;
 
-// Of-a-kind Score Condition; 2 of a kind, 3 of a kind, etc.
+// Of-a-kind Score Condition; 3 of a kind, 4 of a kind, Chance
 public class OfAKindScoreCondition extends ScoreCondition {
 
     private int ofAKindAmount;
 
-    public OfAKindScoreCondition(int id, String desc, int ofAKindAmount){
+    public OfAKindScoreCondition(int id, String desc, int ofAKindAmount) {
         this.id = id;
         description = desc;
         this.ofAKindAmount = ofAKindAmount;
@@ -18,8 +18,8 @@ public class OfAKindScoreCondition extends ScoreCondition {
         // Points = the sum of all dice values
         int total = 0;
 
-        for(Dice dice : allDice){
-                total += dice.getValue();
+        for (Dice dice : allDice) {
+            total += dice.getValue();
         }
 
         this.points = total;
@@ -35,13 +35,13 @@ public class OfAKindScoreCondition extends ScoreCondition {
         // Iterate through each dice value
         for (int i = 1; i <= 6; i++) {
 
-            for(Dice dice : allDice) {
-                if(dice.getValue() == i){
+            for (Dice dice : allDice) {
+                if (dice.getValue() == i){
                     count++;
                 }
             }
 
-            if(count >= ofAKindAmount)
+            if (count >= ofAKindAmount)
                 return true;
 
             count = 0;

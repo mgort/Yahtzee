@@ -94,7 +94,9 @@ public class Yahtzee {
 
     private static boolean allScoreConditionsCompleted() {
         for (ScoreCondition condition : scoreConditions) {
-            if(!condition.completed) return false;
+            if(!condition.completed) {
+                return false;
+            }
         }
 
         return true;
