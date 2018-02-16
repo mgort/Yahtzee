@@ -40,6 +40,17 @@ public class OfAKindScoreConditionTest extends ScoreConditionTestBase {
         assertTrue(condition.isCompeted());
     }
 
+    // Tests that score will be 50 if a yahtzee is given
+    @org.junit.jupiter.api.Test
+    public void scoreYahtzee() {
+        OfAKindScoreCondition condition = new OfAKindScoreCondition(1, "yahtzee test", 5);
+        ArrayList<Dice> allDice = createFiveDice(3, 3, 3, 3, 3);
+        condition.score(allDice);
+
+        assertEquals(50, condition.getPoints());
+        assertTrue(condition.isCompeted());
+    }
+
     // Tests score will be 0 if the given dice are not valid
     @org.junit.jupiter.api.Test
     public void scoreInvalid() {

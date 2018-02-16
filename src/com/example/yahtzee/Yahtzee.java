@@ -92,7 +92,8 @@ public class Yahtzee {
         scoreConditions.add(new FullHouseScoreCondition(9, "Full House"));
         scoreConditions.add(new StraightScoreCondition(10, "Small Straight", 4));
         scoreConditions.add(new StraightScoreCondition(11, "Large Straight", 5));
-        scoreConditions.add(new OfAKindScoreCondition(12, "Chance", 0));
+        scoreConditions.add(new OfAKindScoreCondition(12, "Yahtzee", 5));
+        scoreConditions.add(new OfAKindScoreCondition(13, "Chance", 0));
     }
 
     private static boolean allScoreConditionsCompleted() {

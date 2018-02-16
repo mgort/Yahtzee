@@ -16,14 +16,20 @@ public class OfAKindScoreCondition extends ScoreCondition {
     @Override
     public void score(ArrayList<Dice> allDice) {
         if(isValid(allDice)) {
-            // Points = the sum of all dice values
-            int total = 0;
 
-            for (Dice dice : allDice) {
-                total += dice.getValue();
+            if(ofAKindAmount == 5){
+                // It's a Yahtzee and it's worth 50 points
+                this.points = 50;
+            } else {
+                // Otherwise, points = the sum of all dice
+                int total = 0;
+
+                for (Dice dice : allDice) {
+                    total += dice.getValue();
+                }
+
+                this.points = total;
             }
-
-            this.points = total;
         } else {
             this.points = 0;
         }
