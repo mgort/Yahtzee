@@ -12,7 +12,12 @@ public class FullHouseScoreCondition extends ScoreCondition {
 
     @Override
     public void score(ArrayList<Dice> allDice) {
-        this.points = 25;
+        if(isValid(allDice)) {
+            this.points = 25;
+        } else {
+            this.points = 0;
+        }
+
         this.completed = true;
     }
 

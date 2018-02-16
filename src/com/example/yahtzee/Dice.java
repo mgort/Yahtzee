@@ -1,6 +1,6 @@
 package com.example.yahtzee;
 
-public class Dice {
+public class Dice implements Comparable<Dice>{
 
     private char id;
     private int value;
@@ -32,5 +32,10 @@ public class Dice {
     public void display() {
         System.out.print(id + ") " + value + "\t");
 
+    }
+
+    @Override
+    public int compareTo(Dice o) {
+        return Integer.compare(this.value, o.value);
     }
 }

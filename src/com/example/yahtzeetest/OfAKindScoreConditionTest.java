@@ -29,36 +29,25 @@ public class OfAKindScoreConditionTest extends ScoreConditionTestBase {
         assertTrue(condition.isCompeted());
     }
 
-    // Tests that score will always return the sum of the dice
+    // Tests that score will be the sum of the dice if a valid set is given
     @org.junit.jupiter.api.Test
-    public void scoreAlwaysSums() {
+    public void scoreValid() {
         OfAKindScoreCondition condition = new OfAKindScoreCondition(1, "3 of a kind test", 3);
-        ArrayList<Dice> allDice = createFiveDice(1, 2, 3, 4, 5);
+        ArrayList<Dice> allDice = createFiveDice(1, 2, 3, 3, 3);
         condition.score(allDice);
 
-        assertEquals(15, condition.getPoints());
+        assertEquals(12, condition.getPoints());
         assertTrue(condition.isCompeted());
     }
 
-    // Tests scoring an empty list of dice
+    // Tests score will be 0 if the given dice are not valid
     @org.junit.jupiter.api.Test
-    public void scoreNoDice() {
+    public void scoreInvalid() {
         OfAKindScoreCondition condition = new OfAKindScoreCondition(1, "3 of a kind test", 3);
         ArrayList<Dice> allDice = new ArrayList<Dice>();
         condition.score(allDice);
 
         assertEquals(0, condition.getPoints());
-        assertTrue(condition.isCompeted());
-    }
-
-    // Tests scoring a set of dice with negative numbers
-    @org.junit.jupiter.api.Test
-    public void scoreNegativeDice() {
-        OfAKindScoreCondition condition = new OfAKindScoreCondition(1, "3 of a kind test", 3);
-        ArrayList<Dice> allDice = createFiveDice(1, 2, 3, -3, -6);
-        condition.score(allDice);
-
-        assertEquals(-3, condition.getPoints());
         assertTrue(condition.isCompeted());
     }
 }

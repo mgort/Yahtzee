@@ -15,14 +15,19 @@ public class OfAKindScoreCondition extends ScoreCondition {
 
     @Override
     public void score(ArrayList<Dice> allDice) {
-        // Points = the sum of all dice values
-        int total = 0;
+        if(isValid(allDice)) {
+            // Points = the sum of all dice values
+            int total = 0;
 
-        for (Dice dice : allDice) {
-            total += dice.getValue();
+            for (Dice dice : allDice) {
+                total += dice.getValue();
+            }
+
+            this.points = total;
+        } else {
+            this.points = 0;
         }
 
-        this.points = total;
         this.completed = true;
     }
 

@@ -90,7 +90,9 @@ public class Yahtzee {
         scoreConditions.add(new OfAKindScoreCondition(7, "3 of a Kind", 3));
         scoreConditions.add(new OfAKindScoreCondition(8, "4 of a Kind", 4));
         scoreConditions.add(new FullHouseScoreCondition(9, "Full House"));
-        scoreConditions.add(new OfAKindScoreCondition(10, "Chance", 0));
+        scoreConditions.add(new StraightScoreCondition(10, "Small Straight", 4));
+        scoreConditions.add(new StraightScoreCondition(11, "Large Straight", 5));
+        scoreConditions.add(new OfAKindScoreCondition(12, "Chance", 0));
     }
 
     private static boolean allScoreConditionsCompleted() {
@@ -153,10 +155,7 @@ public class Yahtzee {
 
             for(ScoreCondition condition : scoreConditions){
                 if(condition.getId() == id){
-                    if(!condition.isCompeted()){
-                        return condition.isValid(allDice);
-                    }
-                    return false;
+                    return !condition.isCompeted();
                 }
             }
 
