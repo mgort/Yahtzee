@@ -11,9 +11,12 @@ public class Yahtzee {
     private static ArrayList<Dice> allDice;
     private static ArrayList<Dice> hand;
     private static ArrayList<ScoreCondition> scoreConditions;
+    private static HighScoreService highScoreService;
     private static String line = "---------------------------------------------------------------\n";
 
     public static void main(String[] args) {
+        highScoreService = new HighScoreService();
+
         int turnNumber = 1;
         Scanner scanner = new Scanner( System.in );
         System.out.println("LET'S PLAY SOME YAHTZEE!");
@@ -63,7 +66,16 @@ public class Yahtzee {
 
         // The game is over, display final score
         displayScoreConditions();
-        displayFinalScore();
+        int finalScore = getFinalScore();
+        System.out.println("Your final score is: " + finalScore);
+
+        if(highScoreService.isHighScore(finalScore)){
+            System.out.println("You got a high score!\nEnter your name:");
+            String name = scanner.nextLine();
+            highScoreService.addHighScore(name, finalScore);
+        }
+
+        highScoreService.displayHighScores();
     }
 
     private static void initialize() {
@@ -171,13 +183,13 @@ public class Yahtzee {
         scoreConditions.get(scoreConditionId - 1).score(allDice);
     }
 
-    private static void displayFinalScore() {
+    private static int getFinalScore() {
         int finalScore = 0;
 
         for(ScoreCondition condition : scoreConditions){
             finalScore += condition.getPoints();
         }
 
-        System.out.println("Your final score is: " + finalScore);
+        return finalScore;
     }
 }
